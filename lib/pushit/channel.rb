@@ -4,13 +4,12 @@ module Pushit
     require 'multi_json'
 
     def initialize(channel_name, options = {})
-        options = {
-          :scheme => 'https',
-          :host => 'pushit-beta.herokuapp.com'
+        options               = {
+          scheme: 'https',
+          host:   'ws.slaask.com'
         }.merge(options)
 
-        @channel_name = channel_name
-
+        @channel_name         = channel_name
         @scheme, @host, @port = options.values_at(
           :scheme, :host, :port
         )
@@ -24,10 +23,10 @@ module Pushit
 
     def url(event)
       URI::HTTPS.build({
-        :scheme => @scheme,
-        :host => @host,
-        :port => @port,
-        :path => "/publish/#{@channel_name}/#{event}"
+        scheme: @scheme,
+        host:   @host,
+        port:   @port,
+        path:   "/publish/#{@channel_name}/#{event}"
       })
     end
   end
